@@ -29,14 +29,18 @@ $(document).ready(function() {
 
     console.log("workingArray after primes: " , workingArray);
 
-    // remove "-" from array
-    var newarr = workingArray.join(" ");
+    var newstr = workingArray.join(" ");
+    console.log("newstr: " , newstr);
+    // use regex to replace all "-"
+    var newstr2 = newstr.replace(/-/g, "");
+    console.log("newstr2: " , newstr2);
+
 
     $("#numberofprimes").text("");
     $("#primelist").text("");
 
     $("#numberofprimes").append(workingArray.length);
-    $("#primelist").append(workingArray);
+    $("#primelist").append(newstr2);
 
 
   });
