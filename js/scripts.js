@@ -1,48 +1,53 @@
 $(document).ready(function() {
-
   $("#mainform").submit(function(event){
     event.preventDefault();
 
-    var userBaseArray = [];
-    var workingArray = [];
-
-    var userStartNum = parseInt($("#input1").val());
-    // console.log("parse int userinput: " , parseInt($("#input1").val()));
-
-    // create array of num 2 through n
-    for (i = 2; i <= userStartNum; i += 1) {
-      userBaseArray.push(i);
-    }
-
-    workingArray = userBaseArray;
-    console.log("userBaseArray: " , userBaseArray)
-
-    // new loop to remove non-primes from array
-    for (i = 2; i < userStartNum ; i += 1) {
-      // remove multiples of i from workingArray
-      for (j = i+i ; j <= userStartNum ; j = j + i) {
-        // console.log("j to remove = " , j);
-        workingArray.splice(workingArray.indexOf(j),1,"-");
-        console.log("workingArray = " , workingArray);
+    // create Array containing 2-startNum
+    var createStartArr = function(startNum) {
+      let tmpArr = [];
+      for (i = 2; i <= startNum; i += 1) {
+        tmpArr.push(i);
       }
-    }
+      return tmpArr;
+    }; ////
 
-    console.log("workingArray after primes: " , workingArray);
+    // grab user's input
+    var userNum = parseInt($("#input1").val());
+    // generate working set of numbers
+    var workingArray = createStartArr(userNum);
+    console.log("workingArray = ", workingArray);
 
-    var newstr = workingArray.join(" ");
-    console.log("newstr: " , newstr);
+    // remove non-primes from array
+    var removeNonPrime = function(tmpArr) {
+      for (i = 2; i < userNum ; i += 1) {
+        // remove multiples of i from workingArray
+        for (j = i+i ; j <= userNum ; j = j + i) {
+          tmpArr.splice(tmpArr.indexOf(j),1,"-");
+        }
+      }
+      return tmpArr;
+    };  ////
+
+    workingArray = removeNonPrime(workingArray);
+    var numOfPrimes = workingArray.length;
+
+    // filter out all "-"
+    var filteredArr = workingArray.filter(function(tmpIn) {
+      if (tmpIn !== "-") {
+        return tmpIn;
+      }
+    });
+
+    var newstr2 = filteredArr.join(" ");
     // use regex to replace all "-"
-    var newstr2 = newstr.replace(/-/g, "");
-    console.log("newstr2: " , newstr2);
+    // var newstr2 = newstr.replace(/-/g, "");
 
-
+    // clear output
     $("#numberofprimes").text("");
     $("#primelist").text("");
-
-    $("#numberofprimes").append(workingArray.length);
+    // show new output
+    $("#numberofprimes").append(numOfPrimes);
     $("#primelist").append(newstr2);
 
-
   });
-
 });
