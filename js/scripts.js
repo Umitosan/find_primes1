@@ -15,7 +15,7 @@ $(document).ready(function() {
     var userNum = parseInt($("#input1").val());
     // generate working set of numbers
     var workingArray = createStartArr(userNum);
-    console.log("workingArray = ", workingArray);
+    console.log("Base working array = ", workingArray);
 
     // remove non-primes from array
     var removeNonPrime = function(tmpArr) {
@@ -25,11 +25,11 @@ $(document).ready(function() {
           tmpArr.splice(tmpArr.indexOf(j),1,"-");
         }
       }
+      console.log("Only Primes: " , tmpArr);
       return tmpArr;
     };  ////
 
     workingArray = removeNonPrime(workingArray);
-    var numOfPrimes = workingArray.length;
 
     // filter out all "-"
     var filteredArr = workingArray.filter(function(tmpIn) {
@@ -37,6 +37,8 @@ $(document).ready(function() {
         return tmpIn;
       }
     });
+
+    var numOfPrimes = filteredArr.length;
 
     var newstr2 = filteredArr.join(" ");
     // use regex to replace all "-"

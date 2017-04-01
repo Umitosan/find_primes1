@@ -2,16 +2,9 @@
   text-align: center;
 }
 
-/*.word-output {
-  display: none;
-}
-
-#yourStartnum {
-  font-size: 24px;
+.word-output span{
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 30px;
   color: green;
 }
-
-#fact {
-  font-size: 60px;
-  color: red;
-}*/
